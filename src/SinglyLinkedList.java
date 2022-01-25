@@ -46,6 +46,37 @@ public class SinglyLinkedList {
         }
         current.next = newNode;
     }
+    public void InsertAtGivenPosition(int value,int position)
+    {
+        ListNode node = new ListNode(value);
+        if(position==1)
+        {
+            node.next = head;
+            head = node;
+        }
+        else
+        {
+            ListNode previous = head;
+            int count = 1;
+            while(count<position-1){
+                previous = previous.next;
+                count++;
+            }
+            ListNode current = previous.next;
+            node.next = current;
+            previous.next = node;
+        }
+    }
+    public ListNode deleteFirst()
+    {
+        if(head == null){
+            return null;
+        }
+        ListNode temp = head;
+        head = head.next;
+        temp.next = null;
+        return temp;
+    }
     public int length()
     {
         if(head == null){
@@ -79,6 +110,12 @@ public class SinglyLinkedList {
         sll.display();
 
         sll.insertLast(88);
+        sll.display();
+
+        sll.InsertAtGivenPosition(66,3);
+        sll.display();
+
+        sll.deleteFirst();
         sll.display();
     }
 }
