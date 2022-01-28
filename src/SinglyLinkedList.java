@@ -77,6 +77,58 @@ public class SinglyLinkedList {
         temp.next = null;
         return temp;
     }
+
+    public ListNode deleteLast()
+    {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode current = head;
+        ListNode previous = null;
+        while(current.next != null)
+        {
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null;
+        return current;
+    }
+    public void DeleteAtGivenPosition(int position)
+    {
+        if(position ==1)
+        {
+            head = head.next;
+        }
+        else
+        {
+            ListNode previous = head;
+            int count = 1;
+            while(count < position-1)
+            {
+                previous = previous.next;
+                count++;
+            }
+            ListNode current = previous.next;
+            previous.next = current.next;
+        }
+    }
+
+    public boolean SerachingKey(ListNode head,int searchKey)
+    {
+        if(head==null)
+        {
+            return false;
+        }
+        ListNode current = head;
+        while(current != null)
+        {
+            if(current.data == searchKey){
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
     public int length()
     {
         if(head == null){
@@ -117,5 +169,19 @@ public class SinglyLinkedList {
 
         sll.deleteFirst();
         sll.display();
+
+        sll.deleteLast();
+        sll.display();
+
+        sll.DeleteAtGivenPosition(2);
+        sll.display();
+
+        if(sll.SerachingKey(sll.head, 8)){
+            System.out.println("Search key found");
+        }
+        else
+        {
+            System.out.println("Search key not found");
+        }
     }
 }
