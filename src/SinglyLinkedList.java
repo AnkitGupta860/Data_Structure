@@ -129,6 +129,75 @@ public class SinglyLinkedList {
         }
         return false;
     }
+
+    public ListNode reverse(ListNode head)
+    {
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode next = null;
+        while(current!=null)
+        {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        return previous;
+    }
+
+    public ListNode removenthfromlast(int n)
+    {
+        ListNode current = head;
+        ListNode dummy = head;
+        int count = 0;
+        while(count<n)
+        {
+            current = current.next;
+            count++;
+        }
+        while(current!=null)
+        {
+            current = current.next;
+            dummy = dummy.next;
+        }
+        return dummy;
+    }
+    public void RemoveDuplicate()
+    {
+        ListNode current = head;
+        while(current != null && current.next != null)
+        {
+            if(current.data == current.next.data)
+            {
+                current.next = current.next.next;
+            }
+            else
+            {
+                current = current.next;
+            }
+        }
+    }
+
+    public ListNode InsertNodeInSortedLL(int value)
+    {
+        ListNode newNode = new ListNode(value);
+
+        if(head == null)
+        {
+            return newNode;
+        }
+        ListNode current = head;
+        ListNode temp = null;
+
+        while(current!=null && current.data < newNode.data)
+        {
+            temp = current;
+            current = current.next;
+        }
+        newNode.next = current;
+        temp.next = newNode;
+        return head;
+    }
     public int length()
     {
         if(head == null){
@@ -183,5 +252,6 @@ public class SinglyLinkedList {
         {
             System.out.println("Search key not found");
         }
+
     }
 }
