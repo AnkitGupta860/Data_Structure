@@ -1,3 +1,4 @@
+import java.util.Stack;
 public class BinaryTree {
     private TreeNode root;
 
@@ -27,19 +28,90 @@ public class BinaryTree {
         second.right = fifth;
     }
 
-    public void preOrder(TreeNode root)
+    //public void preOrder(TreeNode root)
+    //{
+    //  if(root==null)
+    //    {
+    //return;
+    //    }
+    //    System.out.print(root.data);
+    //    preOrder(root.left);
+    //    preOrder(root.right);
+    //}
+
+    public void preOrder()
     {
         if(root==null)
         {
             return;
         }
-        System.out.print(root.data);
-        preOrder(root.left);
-        preOrder(root.right);
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty())
+        {
+            TreeNode temp = stack.pop();
+            System.out.println(temp.data);
+            if(temp.right!=null)
+            {
+                stack.push(temp.right);
+            }
+            if(temp.left!=null)
+            {
+                stack.push(temp.left);
+            }
+        }
+    }
+
+    public void inOrder(TreeNode root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        inOrder(root.left);
+        System.out.println(root.data);
+        inOrder(root.right);
+    }
+
+    public void inOrderIterative(TreeNode root)
+    {
+        if(root == null)
+        {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode temp = root;
+
+        while(!stack.isEmpty() || temp!=null)
+        {
+            if(temp != null)
+            {
+                stack.push(temp);
+                temp = temp.left;
+            }
+            else
+            {
+                temp = stack.pop();
+                System.out.println(temp.data);
+                temp = temp.right;
+            }
+        }
+    }
+
+    public void postOrder(TreeNode root){
+        if(root == null)
+        {
+            return;
+        }
+        postOrder(root.left);
+        postOrder(root.right);
+        System.out.println(root.data);
     }
     public static void main(String[] args) {
         BinaryTree bt = new BinaryTree();
         bt.createBinaryTree();
-        bt.preOrder(bt.root);
+        //bt.preOrder();
+        bt.inOrder(bt.root);
     }
 }
